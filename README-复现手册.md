@@ -1,5 +1,18 @@
 # 基于 AI+区块链的区域协同教研平台 · 复现手册
 
+> **在线静态展示页（GitHub Pages）**：https://wszaxl.github.io/ai-blockchain-teaching-platform/
+> **源码仓库（公开）**：https://github.com/wszaxl/ai-blockchain-teaching-platform
+
+## 〇、项目界面预览
+
+| DApp 前端大屏 | 链上交易可视化大屏 |
+| --- | --- |
+| ![DApp前端大屏](docs/教研平台/assets/fig5-7_DApp前端大屏.png) | ![链上交易可视化](docs/教研平台/assets/fig6-1_可视化大屏.png) |
+
+| 编译与部署终端 | 学分查询终端 |
+| --- | --- |
+| ![编译与部署终端](docs/教研平台/assets/fig5-4_编译与部署终端.png) | ![学分查询终端](docs/教研平台/assets/fig5-6_学分查询终端.png) |
+
 本文件夹是该项目的**完整可复现资产包**（第二个项目）。任何一台能上网的 Windows 电脑 +
 本文件夹，即可复现「查证链上交易 → 重编译合约 → 调用合约 → 学分 180」全流程。
 

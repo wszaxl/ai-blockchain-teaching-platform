@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>基于AI+区块链的区域协同教研平台 · 蚂蚁链开放联盟链</title>
+<meta name="description" content="基于AI+区块链的区域协同教研平台：TeachingTrace 智能合约、Java REST 工具链、Python 后端 + HTML 前端，链上真实上链成果展示（蚂蚁链开放联盟链 a00e36c5）">
+<style>
+  :root{
+    --bg:#0b1020; --panel:#141b30; --panel2:#1b2440; --line:#26324f;
+    --txt:#e7ecf7; --dim:#9fb0d0; --acc:#4f9cff; --ok:#39d98a; --warn:#ffcc66;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+       background:linear-gradient(160deg,#0b1020,#0e1730 60%,#0b1020);color:var(--txt);min-height:100vh}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
+  header{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 0 20px;border-bottom:1px solid var(--line)}
+  .logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,#4f9cff,#39d98a);
+        display:flex;align-items:center;justify-content:center;font-weight:800;color:#08111f;font-size:24px}
+  h1{font-size:24px;font-weight:800;line-height:1.3}
+  .sub{color:var(--dim);font-size:13px;margin-top:4px}
+  .gh{ margin-left:auto;background:var(--panel2);border:1px solid var(--line);color:var(--dim);
+       text-decoration:none;padding:8px 16px;border-radius:999px;font-size:13px;white-space:nowrap}
+  .gh:hover{color:var(--acc);border-color:var(--acc)}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 6px}
+  .badge{background:var(--panel);border:1px solid var(--line);color:var(--dim);
+         font-size:12px;padding:5px 12px;border-radius:8px}
+  .badge b{color:var(--acc);font-weight:600}
+  h2{font-size:17px;margin:38px 0 14px;display:flex;align-items:center;gap:8px}
+  h2::before{content:"";width:4px;height:17px;background:var(--acc);border-radius:2px}
+  .grid{display:grid;gap:14px}
+  .g2{grid-template-columns:repeat(2,1fr)} .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)}
+  @media(max-width:860px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--acc);
+       font-size:11px;padding:3px 10px;border-radius:6px;margin-bottom:10px}
+  .kv{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13px}
+  .kv:last-child{border-bottom:none}
+  .kv .k{color:var(--dim);white-space:nowrap} .kv .v{font-family:Consolas,monospace;color:var(--txt);text-align:right;word-break:break-all}
+  .hash{font-family:Consolas,monospace;font-size:11px;color:var(--dim);word-break:break-all;margin-bottom:10px;line-height:1.6}
+  .bal{font-size:40px;font-weight:800;color:var(--ok);font-family:Consolas,monospace}
+  .meta{color:var(--dim);font-size:12px;margin-top:8px;line-height:1.7}
+  .shots{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  @media(max-width:860px){.shots{grid-template-columns:1fr}}
+  .shot{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .shot img{width:100%;display:block;border-bottom:1px solid var(--line)}
+  .shot .cap{padding:10px 14px;font-size:12px;color:var(--dim)}
+  .big180{font-size:52px;font-weight:800;color:var(--ok);font-family:Consolas,monospace;line-height:1}
+  .cmd{background:#070c18;border:1px solid var(--line);border-radius:10px;padding:13px 14px;overflow:auto;
+       font-size:12px;color:#b9c6e2;font-family:Consolas,monospace;line-height:1.7;margin-top:10px}
+  .docs a{color:var(--acc);text-decoration:none;font-size:13px;display:block;padding:7px 0;border-bottom:1px dashed var(--line)}
+  .docs a:hover{text-decoration:underline}
+  .docs a small{color:var(--dim);margin-left:8px}
+  footer{color:var(--dim);font-size:12px;margin-top:44px;line-height:1.9;border-top:1px solid var(--line);padding-top:18px}
+  .oktxt{color:var(--ok)} .warntxt{color:var(--warn)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="logo">链</div>
+  <div>
+    <h1>基于 AI+区块链的区域协同教研平台</h1>
+    <div class="sub">资源协同 · 过程可信 · 学分互认 · 链上可查 —— 基于蚂蚁链开放联盟链的去中心化教研应用</div>
+  </div>
+  <a class="gh" href="https://github.com/wszaxl/ai-blockchain-teaching-platform" target="_blank" rel="noopener">GitHub 仓库 ↗</a>
+</header>
+
+<div class="badges">
+  <span class="badge">智能合约 <b>Solidity · TeachingTrace</b></span>
+  <span class="badge">工具链 <b>Java REST</b></span>
+  <span class="badge">后端 <b>Python</b></span>
+  <span class="badge">前端 <b>HTML</b></span>
+  <span class="badge">链平台 <b>蚂蚁链开放联盟链 a00e36c5</b></span>
+  <span class="badge">状态 <b class="oktxt">已真实上链</b></span>
+</div>
+
+<h2>项目界面预览</h2>
+<div class="shots">
+  <div class="shot">
+    <img src="教研平台/assets/fig5-7_DApp前端大屏.png" alt="DApp 前端大屏">
+    <div class="cap">DApp 前端大屏：链上账户余额、联盟链参数、上链业务记录、交易回执核验</div>
+  </div>
+  <div class="shot">
+    <img src="教研平台/assets/fig6-1_可视化大屏.png" alt="链上交易可视化大屏">
+    <div class="cap">链上交易可视化大屏：真实交易回执解析、miniappinfo 上链卡片</div>
+  </div>
+</div>
+
+<h2>链上资产速查 · 开放联盟链 a00e36c5</h2>
+<div class="grid g4">
+  <div class="card"><div class="tag">链与租户</div>
+    <div class="kv"><span class="k">链 ID</span><span class="v">a00e36c5</span></div>
+    <div class="kv"><span class="k">租户 ID</span><span class="v">LXHOXRFH</span></div>
+    <div class="kv"><span class="k">AccessKey ID</span><span class="v">QoT61…XRFH</span></div>
+  </div>
+  <div class="card"><div class="tag">合约</div>
+    <div class="kv"><span class="k">合约名</span><span class="v">teaching_platform_v1</span></div>
+    <div class="kv"><span class="k">编译器</span><span class="v">solc 0.4.26</span></div>
+    <div class="kv"><span class="k">版本</span><span class="v">v1</span></div>
+  </div>
+  <div class="card"><div class="tag">账户</div>
+    <div class="kv"><span class="k">托管方式</span><span class="v">KMS 托管</span></div>
+    <div class="kv"><span class="k">账户地址</span><span class="v">bd6d0c49…cdf2bc</span></div>
+    <div class="kv"><span class="k">签名算法</span><span class="v">SHA256withRSA</span></div>
+  </div>
+  <div class="card"><div class="tag">燃料账本</div>
+    <div class="kv"><span class="k">初始燃料</span><span class="v">8,508,135</span></div>
+    <div class="kv"><span class="k">五笔写交易</span><span class="v">1,970,678</span></div>
+    <div class="kv"><span class="k">当前余额</span><span class="v oktxt">6,537,457</span></div>
+  </div>
+</div>
+
+<h2>已上链业务记录（真实回执快照）</h2>
+<div class="grid g3">
+  <div class="card">
+    <span class="tag">教研平台 · 成果确权</span>
+    <div class="hash">txHash: 48ba4912c6af94f00007fb1b106503857e96b73acc37580eac23f71ddcecc5b3</div>
+    <div class="kv"><span class="k">成果编号</span><span class="v">ART-2026-001</span></div>
+    <div class="kv"><span class="k">标题</span><span class="v">跨校集体备课案例：二次函数教学设计</span></div>
+    <div class="kv"><span class="k">作者</span><span class="v">周书</span></div>
+    <div class="kv"><span class="k">学校</span><span class="v">成都理工大学工程技术学院</span></div>
+    <div class="kv"><span class="k">区块</span><span class="v">183651012</span></div>
+    <div class="kv"><span class="k">gasUsed</span><span class="v">407754</span></div>
+  </div>
+  <div class="card">
+    <span class="tag">教研平台 · 教研活动</span>
+    <div class="hash">txHash: 7b844056dbd173c64f25c507ec070e72ba8dca1fc56e49d716309b1a8ad4e8e6</div>
+    <div class="kv"><span class="k">活动编号</span><span class="v">ACT-2026-001</span></div>
+    <div class="kv"><span class="k">教师</span><span class="v">陈以宁</span></div>
+    <div class="kv"><span class="k">学校</span><span class="v">成都理工大学工程技术学院</span></div>
+    <div class="kv"><span class="k">贡献分钟</span><span class="v">90</span></div>
+    <div class="kv"><span class="k">折算学分</span><span class="v oktxt">180</span></div>
+    <div class="kv"><span class="k">区块</span><span class="v">183651029</span></div>
+  </div>
+  <div class="card">
+    <span class="tag">合约部署</span>
+    <div class="hash">txHash: ceeaba86f9ed2451379182dbc5263597019e0f2b60e7a155d615f44e6bd956b9</div>
+    <div class="kv"><span class="k">说明</span><span class="v">TeachingTrace 学分互认合约部署上链</span></div>
+    <div class="kv"><span class="k">区块</span><span class="v">183447761</span></div>
+    <div class="kv"><span class="k">gasUsed</span><span class="v">107225</span></div>
+  </div>
+</div>
+
+<h2>链上学分核验（只读，可反复现场演示）</h2>
+<div class="grid g2">
+  <div class="card">
+    <div class="big180">180</div>
+    <div class="meta">教师「陈以宁」参与教研活动 90 分钟，折算学分 = 90 × 2 = <b class="oktxt">180</b>，链上查询返回 <code>outRes = ["180"]</code></div>
+  </div>
+  <div class="card">
+    <span class="tag">复现命令</span>
+    <div class="cmd">java -cp build\tools TeachFlowTool credit … keys\access.key a00e36c5 … LXHOXRFH teaching_platform_v1 陈以宁<br>&gt;&gt;&gt; outRes = ["180"]<br>&gt;&gt;&gt; credit = 180</div>
+    <div class="meta">完整复现步骤见仓库 README-复现手册.md（账户名按隐私要求打码）</div>
+  </div>
+</div>
+
+<h2>项目文档</h2>
+<div class="card docs">
+  <a href="教研平台/教研平台-技术文档.pdf">教研平台-技术文档.pdf <small>完整技术实现与链上核验</small></a>
+  <a href="教研平台/教研平台-方案汇报.pptx">教研平台-方案汇报.pptx <small>方案汇报演示文稿</small></a>
+  <a href="教研平台/01-产品设计与实现方案.md">01-产品设计与实现方案.md <small>场景业务分析 / 联盟链设计 / 合约开发 / 真实链上凭证</small></a>
+  <a href="教研平台/02-智能合约接口文档.md">02-智能合约接口文档.md <small>TeachingTrace 合约接口与调用说明</small></a>
+  <a href="教研平台/07-过程实录与视频拍摄脚本.md">07-过程实录与视频拍摄脚本.md <small>开发过程实录与演示视频脚本</small></a>
+  <a href="教研平台/08-官方编译器核验.md">08-官方编译器核验.md <small>官方 alipay-solc 编译器核验记录</small></a>
+  <a href="教研平台/assets/fig3_上链数据分析图.png">fig3 上链数据分析图.png <small>链上数据维度分析图</small></a>
+</div>
+
+<footer>
+  安全边界：本平台后端仅开放只读链上查询；私钥仅以本地路径参与签名握手，内容与 token 不进入任何 HTTP 响应，亦不包含在本公开仓库中。<br>
+  本地运行完整 DApp：<code>python dapp\backend\dapp_server.py</code> → 浏览器打开 <code>http://127.0.0.1:8790/</code>（实时查链需本机安装 Java 与 REST 工具链，见 README-复现手册.md）。<br>
+  本页为静态展示快照，链上数据来自真实交易回执（快照时间 2026-10-07）；页面所示业务身份为虚构教学场景数据。源码与复现手册：<a href="https://github.com/wszaxl/ai-blockchain-teaching-platform" style="color:var(--acc)">github.com/wszaxl/ai-blockchain-teaching-platform</a>
+</footer>
+
+</div>
+</body>
+</html>
