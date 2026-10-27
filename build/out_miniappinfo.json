@@ -1,0 +1,37 @@
+{
+  "__type__": "miniappinfo",
+  "prevHash": "",
+  "nextHash": "",
+  "lists": [
+    {
+      "name": "批次号",
+      "value": "MY20261001-A",
+      "type": "text"
+    },
+    {
+      "name": "环节",
+      "value": "RAW_MATERIAL",
+      "type": "text"
+    },
+    {
+      "name": "操作主体",
+      "value": "成都理工大学工程技术学院技术组",
+      "type": "text"
+    },
+    {
+      "name": "地点",
+      "value": "呼和浩特",
+      "type": "text"
+    },
+    {
+      "name": "时间",
+      "value": "2026-10-01",
+      "type": "text"
+    },
+    {
+      "name": "详情",
+      "value": "生鲜乳入库500kg，检测合格",
+      "type": "text"
+    }
+  ]
+}

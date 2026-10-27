@@ -1,0 +1,31 @@
+# ===== 敏感凭据（永不提交）=====
+# 蚂蚁链 AccessKey 私钥：README 安全要求，参赛/开源一律排除
+keys/
+
+# 内部工作档案：未打码链账户名、内部笔记、原始录屏
+工作档案/
+
+# 提交物视频（大文件，不进源码仓库）
+提交物-视频/
+
+# 链上过程证据原始存档（内部调试证据）
+build/probe/
+
+# 运行时日志
+可视化/server.log
+*.log
+server.log
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# ===== 系统/编辑器临时 =====
+.DS_Store
+Thumbs.db
+*.tmp
+.idea/
+*.iml

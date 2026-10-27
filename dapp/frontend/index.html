@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>区域协同教研 DApp · 蚂蚁链开放联盟链</title>
+<style>
+  :root{
+    --bg:#0b1020; --panel:#141b30; --panel2:#1b2440; --line:#26324f;
+    --txt:#e7ecf7; --dim:#9fb0d0; --acc:#4f9cff; --ok:#39d98a; --warn:#ffcc66;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+       background:linear-gradient(160deg,#0b1020,#0e1730 60%,#0b1020);color:var(--txt);min-height:100vh}
+  header{padding:26px 32px 18px;border-bottom:1px solid var(--line);
+         display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .logo{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,#4f9cff,#39d98a);
+        display:flex;align-items:center;justify-content:center;font-weight:800;color:#08111f;font-size:20px}
+  h1{font-size:20px;margin:0;font-weight:700}
+  .sub{color:var(--dim);font-size:13px;margin-top:3px}
+  .pill{margin-left:auto;background:var(--panel2);border:1px solid var(--line);color:var(--dim);
+        padding:6px 14px;border-radius:999px;font-size:12px}
+  .pill b{color:var(--ok)}
+  main{padding:24px 32px 48px;max-width:1180px;margin:0 auto}
+  .tier{display:flex;align-items:center;gap:10px;color:var(--dim);font-size:12px;margin:6px 0 20px;flex-wrap:wrap}
+  .tier span{background:var(--panel);border:1px solid var(--line);padding:5px 12px;border-radius:8px;color:var(--txt)}
+  .tier i{color:var(--acc);font-style:normal}
+  h2{font-size:15px;margin:30px 0 12px;color:var(--txt);display:flex;align-items:center;gap:8px}
+  h2::before{content:"";width:4px;height:16px;background:var(--acc);border-radius:2px}
+  .grid{display:grid;gap:14px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g2{grid-template-columns:1fr}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+  .kv{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13px}
+  .kv:last-child{border-bottom:none}
+  .kv .k{color:var(--dim)} .kv .v{font-family:Consolas,monospace;color:var(--txt);text-align:right;word-break:break-all}
+  .bal{font-size:38px;font-weight:800;color:var(--ok);font-family:Consolas,monospace;line-height:1.1}
+  .bal.small{font-size:26px}
+  .meta{color:var(--dim);font-size:12px;margin-top:8px;line-height:1.6}
+  button{background:var(--acc);border:none;color:#061225;font-weight:700;padding:9px 18px;border-radius:9px;
+         cursor:pointer;font-size:13px}
+  button.ghost{background:transparent;border:1px solid var(--line);color:var(--dim);font-weight:500}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  input{width:100%;background:var(--panel2);border:1px solid var(--line);color:var(--txt);
+        padding:10px 12px;border-radius:9px;font-family:Consolas,monospace;font-size:13px}
+  .row{display:flex;gap:10px;align-items:center}
+  .tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--acc);
+       font-size:11px;padding:3px 10px;border-radius:6px;margin-bottom:10px}
+  .fields .kv .v{color:var(--warn)}
+  pre{background:#070c18;border:1px solid var(--line);border-radius:10px;padding:14px;overflow:auto;
+      font-size:12px;color:#b9c6e2;max-height:320px;margin:12px 0 0}
+  .foot{color:var(--dim);font-size:12px;margin-top:34px;line-height:1.8;border-top:1px solid var(--line);padding-top:16px}
+  .spin{display:inline-block;width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--acc);
+        border-radius:50%;animation:sp .7s linear infinite;vertical-align:-1px;margin-right:6px}
+  @keyframes sp{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">链</div>
+  <div>
+    <h1>区域协同教研 DApp</h1>
+    <div class="sub">基于蚂蚁链开放联盟链的教研成果确权与学分互认去中心化应用</div>
+  </div>
+  <div class="pill">后端状态：<b id="status">连接中…</b></div>
+</header>
+
+<main>
+  <div class="tier">
+    <span>① 前端页面 (本页面)</span><i>→ HTTP/JSON →</i>
+    <span>② 本地 DApp 后端 :8790</span><i>→ BaaS REST 网关 →</i>
+    <span>③ 蚂蚁链开放联盟链 · 智能合约</span>
+  </div>
+
+  <h2>链上账户 · 实时燃料余额</h2>
+  <div class="grid g2">
+    <div class="card">
+      <div class="tag">QUERYACCOUNT · 只读实时查询</div>
+      <div class="bal" id="bal">——</div>
+      <div class="meta">最小单位燃料 · 账户地址 <span id="acct" style="font-family:Consolas,monospace;color:var(--acc)"></span></div>
+      <div class="row" style="margin-top:14px">
+        <button id="refresh">刷新实时余额</button>
+        <span class="meta" id="balnote"></span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="tag">燃料账本（gasUsed 精确递减）</div>
+      <div class="kv"><span class="k">初始燃料</span><span class="v">8,508,135</span></div>
+      <div class="kv"><span class="k">五笔写交易累计 gasUsed</span><span class="v">1,970,678</span></div>
+      <div class="kv"><span class="k">当前余额（实时重查）</span><span class="v" id="ledgerBal" style="color:var(--ok)">——</span></div>
+      <div class="meta">deploy 107,225 + 527,773 + 439,088 + 407,754 + 488,838 = 1,970,678；只读学分查询走本地调用，不耗 gas。</div>
+    </div>
+  </div>
+
+  <h2>联盟链网络参数</h2>
+  <div class="card"><div id="chain" class="grid g2"></div></div>
+
+  <h2>已上链业务记录</h2>
+  <div class="grid g3" id="showcase"></div>
+
+  <h2>交易回执核验</h2>
+  <div class="card">
+    <div class="row">
+      <input id="hash" placeholder="输入 64 位交易哈希，例如 48ba4912c6af94f00007fb1b106503857e96b73acc37580eac23f71ddcecc5b3">
+      <button id="query" style="white-space:nowrap">查链上回执</button>
+    </div>
+    <div class="meta" id="qnote" style="margin-top:10px">后端调用 RestChainTool → QUERYRECEIPT / QUERYTRANSACTION，实时回读链上回执与 base64 存证原文。</div>
+    <pre id="receipt" style="display:none"></pre>
+  </div>
+
+  <div class="foot">
+    安全边界：本 DApp 后端仅开放「只读」链上查询；私钥文件 keys/access.key 仅以路径参与本地签名握手，其内容与 token 从不进入任何 HTTP 响应。
+    写交易（合约部署 / 成果确权 / 活动上链）由离线命令行工具 TeachFlowTool 在受控环境执行，不经联网页面触发。账户名称按隐私要求打码，页面所示业务身份为虚构。
+  </div>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+async function jget(u){const r=await fetch(u);return r.json();}
+
+async function loadChain(){
+  const c=await jget('/api/chain');
+  $('chain').innerHTML=Object.entries({
+    '链平台':c.platform,'链 ID':c.chainId,'租户 ID':c.tenantId,'交易网关':c.gateway,
+    '接入 accessId':c.accessId,'签名算法':c.signAlg,'账户托管':c.accountCustody,
+    '账户地址':c.accountAddr,'合约编译器':c.contractCompiler,'燃料机制':c.fuelModel
+  }).map(([k,v])=>`<div class="kv"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+  $('acct').textContent=c.accountAddr.slice(0,16)+'…'+c.accountAddr.slice(-8);
+}
+
+async function loadShowcase(){
+  const list=await jget('/api/showcase');
+  $('showcase').innerHTML=list.map(r=>`
+    <div class="card fields">
+      <div class="tag">${r.tag}</div>
+      ${Object.entries(r.fields).map(([k,v])=>`<div class="kv"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('')}
+      <div class="meta">区块 ${r.block} · gasUsed ${r.gasUsed}<br>
+      <span style="font-family:Consolas,monospace;color:var(--acc)">${r.hash.slice(0,24)}…</span></div>
+      <button class="ghost" style="margin-top:10px" onclick="fillHash('${r.hash}')">核验回执</button>
+    </div>`).join('');
+}
+function fillHash(h){$('hash').value=h;doQuery();window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});}
+
+async function loadBalance(){
+  $('bal').innerHTML='<span class="spin"></span>查询中';
+  $('balnote').textContent='';
+  try{
+    const b=await jget('/api/balance');
+    if(b.ok){
+      const fmt=b.balance.toLocaleString('en-US');
+      $('bal').textContent=fmt;
+      $('ledgerBal').textContent=fmt;
+      $('balnote').textContent=(b.live?'● 实时链上回读 · ':'○ 快照 '+b.ts+' · ')+new Date().toLocaleTimeString('zh-CN')+' — '+b.note;
+      $('status').textContent='在线';
+    }else{
+      $('bal').textContent='查询失败';$('bal').className='bal small';
+      $('balnote').textContent=b.error||('exit '+b.exit);
+      $('status').textContent='异常';
+    }
+  }catch(e){
+    $('bal').textContent='后端未连接';$('bal').className='bal small';
+    $('balnote').textContent='请确认已启动 dapp_server.py (:8790)';
+    $('status').textContent='离线';
+  }
+}
+
+async function doQuery(){
+  const h=$('hash').value.trim();
+  if(h.length!==64){$('qnote').textContent='请输入 64 位交易哈希';return;}
+  $('qnote').innerHTML='<span class="spin"></span>正在回读链上回执…';
+  $('receipt').style.display='none';
+  const r=await jget('/api/receipt?hash='+encodeURIComponent(h));
+  $('receipt').style.display='block';
+  $('receipt').textContent=r.raw||r.error||JSON.stringify(r);
+  $('qnote').textContent=r.ok?('已实时回读 · '+new Date().toLocaleTimeString('zh-CN')):('查询返回：'+(r.error||('exit '+r.exit)));
+}
+
+$('refresh').onclick=loadBalance;
+$('query').onclick=doQuery;
+$('hash').addEventListener('keydown',e=>{if(e.key==='Enter')doQuery();});
+
+(async()=>{
+  await loadChain();await loadShowcase();await loadBalance();
+  const h=new URLSearchParams(location.search).get('hash');
+  if(h){$('hash').value=h.trim();doQuery();}
+})();
+</script>
+</body>
+</html>
